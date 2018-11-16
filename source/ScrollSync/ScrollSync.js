@@ -27,6 +27,9 @@ export default class ScrollSync extends React.PureComponent {
     };
 
     this._onScroll = this._onScroll.bind(this);
+    this._registerChild = this._registerChild.bind(this);
+
+    this._refs = [];
   }
 
   render() {
@@ -48,6 +51,7 @@ export default class ScrollSync extends React.PureComponent {
       scrollLeft,
       scrollTop,
       scrollWidth,
+      registerChild: this._registerChild,
     });
   }
 
@@ -67,5 +71,12 @@ export default class ScrollSync extends React.PureComponent {
       scrollTop,
       scrollWidth,
     });
+    this._refs.forEach(ref => ref.scrollToPosition({scrollLeft, scrollTop}));
+  }
+
+  _registerChild(ref) {
+    if (ref) {
+      this._refs.push(ref);
+    }
   }
 }
