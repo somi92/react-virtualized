@@ -107,6 +107,12 @@ class MultiGrid extends React.PureComponent {
     this._topRightGrid && this._topRightGrid.forceUpdate();
   }
 
+  scrollToPosition({scrollTop, scrollLeft}) {
+    if (this._bottomRightGrid) {
+      this._bottomRightGrid.scrollToPosition({scrollTop, scrollLeft});
+    }
+  }
+
   /** See Grid#invalidateCellSizeAfterRender */
   invalidateCellSizeAfterRender({columnIndex = 0, rowIndex = 0} = {}) {
     this._deferredInvalidateColumnIndex =
