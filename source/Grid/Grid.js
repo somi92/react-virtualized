@@ -1402,10 +1402,22 @@ class Grid extends React.PureComponent<Props, State> {
    * Useful for animating position changes.
    */
   scrollToPosition({scrollLeft, scrollTop}: ScrollPosition) {
+    const {
+      scrollHeight,
+      scrollWidth,
+      clientHeight,
+      clientWidth,
+    } = this._scrollingContainer;
+
+    const maxScrollTop = scrollHeight - clientHeight;
+    const maxScrollLeft = scrollWidth - clientWidth;
+
     const stateUpdate = Grid._getScrollToPositionStateUpdate({
       prevState: this.state,
-      scrollLeft,
-      scrollTop,
+      scrollLeft:
+        scrollLeft != null ? Math.min(scrollLeft, maxScrollLeft) : scrollLeft,
+      scrollTop:
+        scrollTop != null ? Math.min(scrollTop, maxScrollTop) : scrollTop,
     });
 
     if (stateUpdate) {
