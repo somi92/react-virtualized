@@ -11,12 +11,16 @@
   "license": "MIT",
   "scripts": {
     "build:types": "flow-copy-source --ignore \"**/*.{jest,e2e,ssr,example}.js\" source/WindowScroller dist/es/WindowScroller && flow-copy-source --ignore \"**/*.{jest,e2e,ssr,example}.js\" source/AutoSizer dist/es/AutoSizer",
-    "build": "npm run build:commonjs && npm run build:css && npm run build:es && npm run build:demo && npm run build:umd",
+    "build": "npm run build:commonjs && npm run build:css && npm run build:es && npm run build:demo && npm run build:umd && npm run package:ts",
     "build:commonjs": "npm run clean:commonjs && cross-env NODE_ENV=commonjs babel source --out-dir dist/commonjs",
     "build:css": "postcss source/styles.css -o styles.css --use autoprefixer",
     "build:demo": "npm run clean:demo && cross-env NODE_ENV=production webpack --config webpack.config.demo.js -p --bail",
     "build:es": "npm run clean:es && npm run build:types && cross-env NODE_ENV=es babel source --out-dir dist/es",
     "build:umd": "npm run clean:umd && cross-env NODE_ENV=rollup rollup -c",
+    "package:ts": "npm run package:ts:index && npm run package:ts:commonjs && npm run package:ts:es",
+    "package:ts:index": "cpx \"node_modules/@types/react-virtualized/index.d.ts\" .",
+    "package:ts:commonjs": "cpx \"node_modules/@types/react-virtualized/dist/commonjs/*.d.ts\" dist/commonjs",
+    "package:ts:es": "cpx \"node_modules/@types/react-virtualized/dist/es/*.d.ts\" dist/es",
     "check-all": "yarn prettier && yarn lint && yarn flow",
     "ci-check": "yarn prettier:diff && yarn lint && yarn flow",
     "clean": "npm run clean:commonjs && npm run clean:demo && npm run clean:es && npm run clean:umd",
@@ -24,13 +28,11 @@
     "clean:demo": "rimraf build",
     "clean:es": "rimraf dist/es",
     "clean:umd": "rimraf dist/umd",
-    "deploy": "gh-pages -d build",
     "lint": "eslint 'source/**/*.js'",
     "typecheck": "flow check",
     "prebuild": "npm run typecheck && npm run lint",
     "prettier": "prettier --write '{playground,source}/**/*.js'",
     "prettier:diff": "prettier --list-different '{playground,source}/**/*.js'",
-    "postpublish": "npm run deploy",
     "prepublish": "npm run build",
     "start": "cross-env NODE_ENV=development webpack-dev-server --hot --config webpack.config.dev.js",
     "test": "npm run test:jest",
@@ -53,6 +55,7 @@
   },
   "files": [
     "dist",
+    "index.d.ts",
     "styles.css"
   ],
   "repository": {
@@ -121,6 +124,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "codecov": "^2.2.0",
     "codemirror": "^5.18.0",
+    "cpx": "^1.5.0",
     "cross-env": "^5.0.1",
     "css-loader": "^0.28.7",
     "eslint": "^4.14.0",
@@ -168,6 +172,9 @@
     "webpack-dev-server": "^2.9.7"
   },
   "dependencies": {
+    "@types/prop-types": "*",
+    "@types/react": "*",
+    "@types/react-virtualized": "*",
     "babel-runtime": "^6.26.0",
     "clsx": "^1.0.1",
     "dom-helpers": "^2.4.0 || ^3.0.0",
