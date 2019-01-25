@@ -144,7 +144,7 @@ Changelog
 * 🎉 `WindowScroller` supports `scrollToIndex` prop. ([@leoasis](https://github.com/leoasis) - [#643](https://github.com/bvaughn/react-virtualized/pull/643))
 * 🎉 Allow `ArrowKeyStepper` to be used as a controlled component. ([@mking-clari](https://github.com/mking-clari) - [#688](https://github.com/bvaughn/react-virtualized/pull/688))
 * 🎉New `handleScroll` method on `Grid` to better support custom scrollbars. ([@5angel](https://github.com/5angel) - [#693](https://github.com/bvaughn/react-virtualized/pull/693))
-* 🐛 Added edge-case gaurd to `WindowScroller ` to prevent calling `setState` when unmounted. ([@liorbrauer](https://github.com/liorbrauer) - [#689](https://github.com/bvaughn/react-virtualized/pull/689))
+* 🐛 Added edge-case guard to `WindowScroller ` to prevent calling `setState` when unmounted. ([@liorbrauer](https://github.com/liorbrauer) - [#689](https://github.com/bvaughn/react-virtualized/pull/689))
 * 🐛 Fixed edge-case in `Grid` where setting an initial scroll-to offset with a `height` or `width` of 0 caused the scroll-to prop to be ignored when size later changed. ([#691](https://github.com/bvaughn/react-virtualized/pull/691))
 
 ##### 9.7.6
@@ -177,7 +177,7 @@ Changelog
 ##### 9.6.0
 * 🎉 `WindowScroller` and `Grid` now support horizontal window-scrolling via new `autoWidth` property. ([@maxnowack](https://github.com/maxnowack) - [#644](https://github.com/bvaughn/react-virtualized/pull/644))
 * 🐛 Fixed a Content Security Policy (CSP) issue in an upstream dependency that impacted users of the `Masonry` component. For more information see issue [#640](https://github.com/bvaughn/react-virtualized/issues/640).
-* ✨ `List` and `Table` always overscan 1 row in the direction _not_ being scrolled to better support keyboard nativigation (via TAB and SHIFT+TAB). For more information see [issue #625](https://github.com/bvaughn/react-virtualized/issues/625).
+* ✨ `List` and `Table` always overscan 1 row in the direction _not_ being scrolled to better support keyboard navigation (via TAB and SHIFT+TAB). For more information see [issue #625](https://github.com/bvaughn/react-virtualized/issues/625).
 * ✨ `Grid` no longer alters scroll direction for one axis (eg vertical) if a scroll event occurs for another axis (eg horizontal).
 
 ##### 9.5.0
@@ -527,7 +527,7 @@ By default this is disabled but `VirtualScroll` and `FlexTable` both enable it o
 Renamed `Grid` refs within `FlexTable` and `VirtualScroll` from `_grid` to `Grid`.
 
 This is done to better support interoperability between `FlexTable` and `react-sortable-hoc` which requires a handle on the inner `Grid`.
-Technically the change is not required but it is more inline with JavaScript naming conventions (since I plan to preserve this proprety from an Api perspective).
+Technically the change is not required but it is more inline with JavaScript naming conventions (since I plan to preserve this property from an Api perspective).
 
 ##### 7.15.0
 Added support for greater `FlexTable` customization via a new `rowRenderer` property.
@@ -953,7 +953,7 @@ Fixed `AutoSizer` bug that caused it to prevent parent flex containers from shri
 Added `scrollToIndex` property to `FlexTable` to be passed through to inner `Grid`.
 
 ##### 4.6.6
-Better gaurd against `NaN` values for `clientWidth` and `offsetWidth` for test environments using `jsdom`.
+Better guard against `NaN` values for `clientWidth` and `offsetWidth` for test environments using `jsdom`.
 
 ##### 4.6.5
 Added `react-dom` to the Webpack :externals node to avoid including it in the build.
